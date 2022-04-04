@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <table class="table">
+        <tr class="table-header__row">
+          <th class="table-header__data">Name</th>
+          <th class="table-header__data">Created</th>
+          <th class="table-header__data">Category</th>
+          <th class="table-header__data">Content</th>
+          <th class="table-header__data">Dates</th>
+        </tr>
+      </table>
+
+      <table class="table">
+        <tr class="table-header__row">
+          <th class="table-header__data">Note Category</th>
+          <th class="table-header__data">Active</th>
+          <th class="table-header__data">Archived</th>
+        </tr>
+      </table>
+    </div>
+
+    <!-- add todo modal  -->
+
+    <div class="modal">
+      <div class="backdrop">
+        <div class="modal__content">
+          <form class="todo-form">
+            <select class="todo-form__select" name="category" id="category">
+              <option value="Task">Task</option>
+              <option value="Idea">Idea</option>
+              <option value="Random Thought">Random Thought</option>
+            </select>
+            <label class="todo-form__label" for="name">Todo Name</label>
+            <input name="name" class="todo-form__input" id="name" type="text" required />
+
+            <label class="todo-form__label" for="date">Todo Date</label>
+            <input name="date" class="todo-form__input" id="date" type="text" />
+
+            <label name="date" class="todo-form__label" for="content">Todo Content</label>
+            <textarea
+              class="todo-form__input"
+              name="content"
+              id="content"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <button class="submit" type="submit">Add ToDo</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
