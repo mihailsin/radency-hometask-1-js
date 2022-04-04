@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <ul class="header-list">
+          <li class="header-list__item">Name</li>
+          <li class="header-list__item">Created</li>
+          <li class="header-list__item">Category</li>
+          <li class="header-list__item">Content</li>
+          <li class="header-list__item">Dates</li>
+          <li class="header-list__item">
+            <button type="button">archive</button>
+            <button type="button">delete</button>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <section class="todos">
+        <div class="container">
+          <div class="todos-wrapper">
+            <ul class="todo">
+              <li class="todo__field"></li>
+            </ul>
+          </div>
+          <button type="button" class="create-note">Create Note</button>
+        </div>
+      </section>
+
+      <section class="todos-counter">
+        <ul class="todos-counter__list">
+          <li class="todos-counter__item"></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+  <script src="/index.js" type="module"></script>
 </html>

@@ -1,0 +1,60 @@
+:root {
+  --title-background-color: #999;
+  --title-color: #eee;
+  --item-background-color: #8989a0;
+  --item-color: #111;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.header {
+}
+
+.header-list {
+  background-color: var(--title-background-color);
+  color: var(--title-color);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+.todo {
+  background-color: var(--item-background-color);
+  color: var(--item-color);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  overflow: hidden;
+}
