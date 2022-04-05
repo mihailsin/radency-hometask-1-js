@@ -39,8 +39,10 @@ ol {
   padding-right: 15px;
 }
 
-.table {
+.table,
+.categories-table {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .table-header__row {
@@ -59,6 +61,7 @@ ol {
 .todo__field {
   overflow: hidden;
   padding: 10px;
+  text-align: center;
 }
 
 .backdrop {
@@ -71,7 +74,11 @@ ol {
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.6);
 }
-
+.open-modal {
+  display: block;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
 .close-modal {
   max-width: 50px;
   padding: 5px;

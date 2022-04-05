@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 import { selectors } from './selectors';
 import { todos } from '../data/todos';
-import { renderMarkup, createMarkup } from './markup';
+import { renderTodos, createTodos, createCategoriesList } from './markup';
 
-const defaultData = `<tr class="table-header__row">
+const todosHeader = `<tr class="table-header__row">
           <th class="table-header__data">Name</th>
           <th class="table-header__data">Created</th>
           <th class="table-header__data">Category</th>
@@ -15,18 +15,38 @@ const defaultData = `<tr class="table-header__row">
           </th>
         </tr>`;
 
+const categoriesHeader = `<tr class="table-header__row">
+            <th class="table-header__data">Note Category</th>
+            <th class="table-header__data">Active</th>
+            <th class="table-header__data">Archived</th>
+          </tr>`;
+
 const itemButtonsClickHandler = e => {
   if (e.target.classList.contains('delete-item')) {
     console.log(Number(e.target.id));
+    todos[Number(e.target.id)].active = false;
     todos.splice(Number(e.target.id), 1);
-    selectors.todoList.innerHTML = defaultData;
-    renderMarkup(selectors.todoList, createMarkup(todos));
+    selectors.todoList.innerHTML = todosHeader;
+    selectors.categoriesList.innerHTML = categoriesHeader;
+    renderTodos(selectors.todoList, createTodos(todos));
+    renderTodos(selectors.categoriesList, createCategoriesList(todos));
+  }
+
+  if (e.target.classList.contains('archive-item')) {
+    console.log(Number(e.target.id));
+    todos[Number(e.target.id)].active = false;
+    todos[Number(e.target.id)].archived = true;
+    selectors.todoList.innerHTML = todosHeader;
+    selectors.categoriesList.innerHTML = categoriesHeader;
+    renderTodos(selectors.todoList, createTodos(todos));
+    renderTodos(selectors.categoriesList, createCategoriesList(todos));
   }
 };
 
 export const onSubmit = e => {
   e.preventDefault();
-  selectors.todoList.innerHTML = defaultData;
+  selectors.todoList.innerHTML = todosHeader;
+  selectors.categoriesList.innerHTML = categoriesHeader;
   const { nameInput, deadlineInput, contentInput, categoryInput } = selectors;
   const todo = {
     id: nanoid(10),
@@ -39,7 +59,8 @@ export const onSubmit = e => {
     [deadlineInput.name]: deadlineInput.value,
   };
   todos.push(todo);
-  renderMarkup(selectors.todoList, createMarkup(todos));
+  renderTodos(selectors.todoList, createTodos(todos));
+  renderTodos(selectors.categoriesList, createCategoriesList(todos));
 };
 
 selectors.addTodoForm.addEventListener('submit', onSubmit);

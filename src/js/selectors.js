@@ -10,4 +10,5 @@ export const selectors = {
   addTodoModal: document.querySelector('.modal'),
   openAddTodoButton: document.querySelector('.open-modal'),
   closeAddTodoButton: document.querySelector('.close-modal'),
+  categoriesList: document.querySelector('.categories-table'),
 };
