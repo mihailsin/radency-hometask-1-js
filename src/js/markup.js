@@ -1,22 +1,27 @@
 import { todoList } from './selectors';
 import { todos } from '../data/todos';
+import { onSubmit } from './functions';
+import { selectors } from './selectors';
 
-const createMarkup = items =>
-  items
+export const createMarkup = items => {
+  return items
     .map(
-      ({ name, created, category, content }) =>
+      ({ id, name, created, category, content, deadline }, idx) =>
         `<tr class="todo">
     <td class="todo__field">${name}</td>
     <td class="todo__field">${created}</td>
     <td class="todo__field">${category}</td>
     <td class="todo__field">${content}</td>
+    <td class="todo__field">${deadline}</td>
+    <td class="todo__field">
+    <button type="button" class="archive-item">archive</button>
+    <button type="button" id="${idx}" class="delete-item">delete</button></td>
     </tr>`,
     )
     .join('');
+};
 
-const renderMarkup = (targetElement, elementToRender) =>
+export const renderMarkup = (targetElement, elementToRender) =>
   targetElement.insertAdjacentHTML('beforeend', elementToRender);
 
-console.log(createMarkup(todos));
-
-renderMarkup(todoList, createMarkup(todos));
+renderMarkup(selectors.todoList, createMarkup(todos));
