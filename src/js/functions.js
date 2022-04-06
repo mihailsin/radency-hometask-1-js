@@ -136,7 +136,7 @@ export const onEdit = e => {
   renderTodos(selectors.todoList, createTodos(todos));
   renderTodos(selectors.categoriesList, createCategoriesList(todos));
   e.target.reset();
-  selectors.editgiModal.classList.add('is-hidden');
+  selectors.editModal.classList.add('is-hidden');
 };
 
 selectors.addTodoForm.addEventListener('submit', onSubmit);
