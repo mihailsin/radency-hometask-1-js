@@ -1,19 +1,16 @@
-export const todoList = document.querySelector('.table');
-export const addTodo = document.querySelector('.submit');
-export const addTodoForm = document.querySelector('.todo-form');
-export const nameInput = document.querySelector('#name');
-export const dateInput = document.querySelector('#date');
-export const contentInput = document.querySelector('#content');
-export const categoryInput = document.querySelector('#category');
-addTodoForm.addEventListener('submit', e => {
-  e.preventDefault();
-  console.log(e.target);
-
-  const todo = {
-    [nameInput.name]: nameInput.value,
-    [dateInput.name]: dateInput.value,
-    [contentInput.name]: contentInput.value,
-    [categoryInput.name]: categoryInput.value,
-  };
-  console.log(todo);
-});
+export const selectors = {
+  todoList: document.querySelector('.table'),
+  addTodoForm: document.querySelector('.todo-form'),
+  nameInput: document.querySelector('#name'),
+  contentInput: document.querySelector('#content'),
+  categoryInput: document.querySelector('#category'),
+  todosItems: document.querySelector('.todos-items'),
+  addTodoModal: document.querySelector('.modal'),
+  openAddTodoButton: document.querySelector('.open-modal'),
+  closeAddTodoButton: document.querySelector('.close-modal'),
+  categoriesList: document.querySelector('.categories-table'),
+  archivedTodosList: document.querySelector('.archived-table'),
+  archivedModal: document.querySelector('.archived-modal'),
+  openArchivedButton: document.querySelector('.open-archived-modal'),
+  closeArchivedButton: document.querySelector('.close-archived-modal'),
+};
