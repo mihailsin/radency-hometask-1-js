@@ -28,11 +28,12 @@ const archivedHeader = `<tr class="table-header__row">
           <th class="table-header__data">Dates</th>
           <th class="table-header__data">
           <button type="button" class="unarchive-all">unarchive all</button>
-          <button type="button" class="delete-all">delete all</button>
           </th>
         </tr>`;
 
-const itemButtonsClickHandler = e => {
+let itemToEdit;
+
+export const itemButtonsClickHandler = e => {
   if (e.target.classList.contains('delete-item')) {
     todos[Number(e.target.id)].active = false;
     todos.splice(Number(e.target.id), 1);
@@ -93,13 +94,18 @@ const itemButtonsClickHandler = e => {
     renderTodos(selectors.categoriesList, createCategoriesList(todos));
     renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
   }
+  if (e.target.classList.contains('edit-item')) {
+    selectors.editModal.classList.remove('is-hidden');
+    itemToEdit = todos[Number(e.target.id)];
+  }
 };
 
 export const onSubmit = e => {
   e.preventDefault();
   selectors.todoList.innerHTML = todosHeader;
   selectors.categoriesList.innerHTML = categoriesHeader;
-  const { nameInput, deadlineInput, contentInput, categoryInput } = selectors;
+  const { nameInput, contentInput, categoryInput } = selectors;
+  const date = /(\d\d\.\d\d\.\d\d\d\d|\d\.\d\d\.\d\d\d\d|\d\d\/\d\d\/\d\d\d\d|\d\/\d\d\/\d\d\d\d)/g;
   const todo = {
     id: nanoid(10),
     [nameInput.name]: nameInput.value,
@@ -108,14 +114,29 @@ export const onSubmit = e => {
     archived: false,
     active: true,
     created: new Date().toLocaleString(),
-    dates: '',
+    dates: contentInput.value?.match(date)?.join(', ') || '',
   };
   todos.push(todo);
   renderTodos(selectors.todoList, createTodos(todos));
   renderTodos(selectors.categoriesList, createCategoriesList(todos));
 };
 
+export const onEdit = e => {
+  e.preventDefault();
+  selectors.todoList.innerHTML = todosHeader;
+  selectors.categoriesList.innerHTML = categoriesHeader;
+  const { editedNameInput, editedContentInput, editedCategoryInput } = selectors;
+  const date = /(\d\d\.\d\d\.\d\d\d\d|\d\.\d\d\.\d\d\d\d|\d\d\/\d\d\/\d\d\d\d|\d\/\d\d\/\d\d\d\d)/g;
+  itemToEdit.name = editedNameInput.value;
+  itemToEdit.category = editedCategoryInput.value;
+  itemToEdit.content = editedContentInput.value;
+  itemToEdit.dates = editedContentInput.value?.match(date)?.join(', ') || '';
+  renderTodos(selectors.todoList, createTodos(todos));
+  renderTodos(selectors.categoriesList, createCategoriesList(todos));
+};
+
 selectors.addTodoForm.addEventListener('submit', onSubmit);
+selectors.editModal.addEventListener('submit', onEdit);
 
 selectors.todoList.addEventListener('click', itemButtonsClickHandler);
 selectors.archivedTodosList.addEventListener('click', itemButtonsClickHandler);
@@ -132,4 +153,8 @@ selectors.openArchivedButton.addEventListener('click', e => {
 
 selectors.closeArchivedButton.addEventListener('click', e => {
   selectors.archivedModal.classList.add('is-hidden');
+});
+
+selectors.closeEditButton.addEventListener('click', e => {
+  selectors.editModal.classList.add('is-hidden');
 });

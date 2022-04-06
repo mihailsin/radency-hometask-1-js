@@ -42,6 +42,7 @@
       <div class="modal is-hidden">
         <div class="backdrop">
           <div class="modal__content">
+            <h3 class="modal-title">Add task</h3>
             <form class="todo-form">
               <button type="button" class="close-modal">close</button>
               <select class="todo-form__select" name="category" id="category">
@@ -72,7 +73,8 @@
       <div class="archived-modal is-hidden">
         <div class="backdrop">
           <div class="modal__content">
-            <button type="button" class="close-archived-modal">close</button>
+            <h3 class="modal-title">Archived tasks</h3>
+            <button type="button" class="close-archived-modal close-modal">close</button>
             <table class="archived-table">
               <tr class="table-header__row">
                 <th class="table-header__data">Name</th>
@@ -85,6 +87,43 @@
                 </th>
               </tr>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- edit todos modal -->
+
+      <div class="edit-modal is-hidden">
+        <div class="backdrop">
+          <div class="modal__content">
+            <h3 class="modal-title">Edit Todo</h3>
+            <form class="todo-form">
+              <button type="button" class="close-edit-modal close-modal">close</button>
+              <select class="todo-form__select" name="edit-category" id="edit-category">
+                <option value="Task">Task</option>
+                <option value="Idea">Idea</option>
+                <option value="Random Thought">Random Thought</option>
+              </select>
+              <label class="todo-form__label" for="edit-name">Todo Name</label>
+              <input
+                name="edit-name"
+                class="todo-form__input"
+                id="edit-name"
+                type="text"
+                required
+              />
+
+              <label name="date" class="todo-form__label" for="edit-content">Todo Content</label>
+              <textarea
+                class="todo-form__input"
+                name="edit-content"
+                id="edit-content"
+                cols="30"
+                rows="10"
+                required
+              ></textarea>
+              <button class="submit" type="submit">Edit ToDo</button>
+            </form>
           </div>
         </div>
       </div>
