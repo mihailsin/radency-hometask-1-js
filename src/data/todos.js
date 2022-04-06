@@ -9,7 +9,7 @@ export const todos = [
     content: 'Potatoes,Tomatoes',
     archived: false,
     active: true,
-    deadline: '',
+    dates: '',
   },
   {
     id: nanoid(10),
@@ -19,7 +19,7 @@ export const todos = [
     content: 'Implement archiving notes feature',
     archived: false,
     active: true,
-    deadline: '',
+    dates: '',
   },
   {
     id: nanoid(10),
@@ -29,7 +29,7 @@ export const todos = [
     content: 'Should do something cool during vacation',
     archived: false,
     active: true,
-    deadline: '',
+    dates: '',
   },
   {
     id: nanoid(10),
@@ -39,6 +39,6 @@ export const todos = [
     content: 'Finish 1st hometask until 10.04.2022',
     archived: false,
     active: true,
-    deadline: '',
+    dates: '',
   },
 ];

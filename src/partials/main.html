@@ -16,14 +16,18 @@
             <th class="table-header__data">Created</th>
             <th class="table-header__data">Category</th>
             <th class="table-header__data">Content</th>
-            <th class="table-header__data">Deadline</th>
+            <th class="table-header__data">Dates</th>
             <th class="table-header__data">
-              <button type="button" class="archive-all">archive</button>
-              <button type="button" class="delete-all">delete</button>
+              <button type="button" class="archive-all">archive all</button>
+              <button type="button" class="delete-all">delete all</button>
             </th>
           </tr>
         </table>
-        <button type="button" class="open-modal">Add Todo</button>
+        <div class="buttons-wrapper">
+          <button type="button" class="open-modal">Add Todo</button>
+          <button type="button" class="open-archived-modal">Archived Todos</button>
+        </div>
+
         <table class="categories-table">
           <tr class="table-header__row">
             <th class="table-header__data">Note Category</th>
@@ -48,9 +52,6 @@
               <label class="todo-form__label" for="name">Todo Name</label>
               <input name="name" class="todo-form__input" id="name" type="text" required />
 
-              <label class="todo-form__label" for="deadline">Deadline</label>
-              <input name="deadline" class="todo-form__input" id="deadline" type="text" />
-
               <label name="date" class="todo-form__label" for="content">Todo Content</label>
               <textarea
                 class="todo-form__input"
@@ -62,6 +63,28 @@
               ></textarea>
               <button class="submit" type="submit">Add ToDo</button>
             </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- archived todos modal -->
+
+      <div class="archived-modal is-hidden">
+        <div class="backdrop">
+          <div class="modal__content">
+            <button type="button" class="close-archived-modal">close</button>
+            <table class="archived-table">
+              <tr class="table-header__row">
+                <th class="table-header__data">Name</th>
+                <th class="table-header__data">Created</th>
+                <th class="table-header__data">Category</th>
+                <th class="table-header__data">Content</th>
+                <th class="table-header__data">Dates</th>
+                <th class="table-header__data">
+                  <button type="button" class="unarchive-all">unarchive all</button>
+                </th>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

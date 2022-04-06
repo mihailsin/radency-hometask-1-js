@@ -1,17 +1,17 @@
 import { nanoid } from 'nanoid';
 import { selectors } from './selectors';
 import { todos } from '../data/todos';
-import { renderTodos, createTodos, createCategoriesList } from './markup';
+import { renderTodos, createTodos, createCategoriesList, createArchivedTodos } from './markup';
 
 const todosHeader = `<tr class="table-header__row">
           <th class="table-header__data">Name</th>
           <th class="table-header__data">Created</th>
           <th class="table-header__data">Category</th>
           <th class="table-header__data">Content</th>
-          <th class="table-header__data">Deadline</th>
+          <th class="table-header__data">Dates</th>
           <th class="table-header__data">
-          <button type="button" class="archive-all">archive</button>
-          <button type="button" class="delete-all">delete</button>
+          <button type="button" class="archive-all">archive all</button>
+          <button type="button" class="delete-all">delete all</button>
           </th>
         </tr>`;
 
@@ -20,26 +20,78 @@ const categoriesHeader = `<tr class="table-header__row">
             <th class="table-header__data">Active</th>
             <th class="table-header__data">Archived</th>
           </tr>`;
+const archivedHeader = `<tr class="table-header__row">
+          <th class="table-header__data">Name</th>
+          <th class="table-header__data">Created</th>
+          <th class="table-header__data">Category</th>
+          <th class="table-header__data">Content</th>
+          <th class="table-header__data">Dates</th>
+          <th class="table-header__data">
+          <button type="button" class="unarchive-all">unarchive all</button>
+          <button type="button" class="delete-all">delete all</button>
+          </th>
+        </tr>`;
 
 const itemButtonsClickHandler = e => {
   if (e.target.classList.contains('delete-item')) {
-    console.log(Number(e.target.id));
     todos[Number(e.target.id)].active = false;
     todos.splice(Number(e.target.id), 1);
     selectors.todoList.innerHTML = todosHeader;
     selectors.categoriesList.innerHTML = categoriesHeader;
+    selectors.archivedTodosList.innerHTML = archivedHeader;
     renderTodos(selectors.todoList, createTodos(todos));
     renderTodos(selectors.categoriesList, createCategoriesList(todos));
+    renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
   }
 
   if (e.target.classList.contains('archive-item')) {
-    console.log(Number(e.target.id));
     todos[Number(e.target.id)].active = false;
     todos[Number(e.target.id)].archived = true;
     selectors.todoList.innerHTML = todosHeader;
     selectors.categoriesList.innerHTML = categoriesHeader;
+    selectors.archivedTodosList.innerHTML = archivedHeader;
     renderTodos(selectors.todoList, createTodos(todos));
     renderTodos(selectors.categoriesList, createCategoriesList(todos));
+    renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
+  }
+  if (e.target.classList.contains('unarchive-item')) {
+    todos[Number(e.target.id)].active = true;
+    todos[Number(e.target.id)].archived = false;
+    selectors.todoList.innerHTML = todosHeader;
+    selectors.categoriesList.innerHTML = categoriesHeader;
+    selectors.archivedTodosList.innerHTML = archivedHeader;
+    renderTodos(selectors.todoList, createTodos(todos));
+    renderTodos(selectors.categoriesList, createCategoriesList(todos));
+    renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
+  }
+  if (e.target.classList.contains('archive-all')) {
+    todos.map(todo => (todo.archived = true));
+    todos.map(todo => (todo.active = false));
+    selectors.todoList.innerHTML = todosHeader;
+    selectors.categoriesList.innerHTML = categoriesHeader;
+    selectors.archivedTodosList.innerHTML = archivedHeader;
+    renderTodos(selectors.todoList, createTodos(todos));
+    renderTodos(selectors.categoriesList, createCategoriesList(todos));
+    renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
+  }
+  if (e.target.classList.contains('unarchive-all')) {
+    todos.map(todo => (todo.archived = false));
+    todos.map(todo => (todo.active = true));
+    selectors.todoList.innerHTML = todosHeader;
+    selectors.categoriesList.innerHTML = categoriesHeader;
+    selectors.archivedTodosList.innerHTML = archivedHeader;
+    renderTodos(selectors.todoList, createTodos(todos));
+    renderTodos(selectors.categoriesList, createCategoriesList(todos));
+    renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
+  }
+  if (e.target.classList.contains('delete-all')) {
+    todos.splice(0, todos.length);
+    selectors.todoList.innerHTML = todosHeader;
+    selectors.categoriesList.innerHTML = categoriesHeader;
+    selectors.archivedTodosList.innerHTML = archivedHeader;
+    renderTodos(selectors.todoList, createTodos(todos));
+    renderTodos(selectors.categoriesList, createCategoriesList(todos));
+    renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
   }
 };
 
@@ -55,8 +107,8 @@ export const onSubmit = e => {
     [categoryInput.name]: categoryInput.value,
     archived: false,
     active: true,
-    created: Date.now(),
-    [deadlineInput.name]: deadlineInput.value,
+    created: new Date().toLocaleString(),
+    dates: '',
   };
   todos.push(todo);
   renderTodos(selectors.todoList, createTodos(todos));
@@ -66,9 +118,18 @@ export const onSubmit = e => {
 selectors.addTodoForm.addEventListener('submit', onSubmit);
 
 selectors.todoList.addEventListener('click', itemButtonsClickHandler);
+selectors.archivedTodosList.addEventListener('click', itemButtonsClickHandler);
 selectors.openAddTodoButton.addEventListener('click', e => {
   selectors.addTodoModal.classList.remove('is-hidden');
 });
 selectors.closeAddTodoButton.addEventListener('click', e => {
   selectors.addTodoModal.classList.add('is-hidden');
+});
+
+selectors.openArchivedButton.addEventListener('click', e => {
+  selectors.archivedModal.classList.remove('is-hidden');
+});
+
+selectors.closeArchivedButton.addEventListener('click', e => {
+  selectors.archivedModal.classList.add('is-hidden');
 });

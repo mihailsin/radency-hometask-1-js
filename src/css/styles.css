@@ -74,11 +74,13 @@ ol {
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.6);
 }
-.open-modal {
-  display: block;
-  margin-left: auto;
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
+
 .close-modal {
   max-width: 50px;
   padding: 5px;

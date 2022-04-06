@@ -5,14 +5,14 @@ import { selectors } from './selectors';
 
 export const createTodos = items =>
   items
-    .map(({ id, name, created, category, content, deadline, archived }, idx) => {
+    .map(({ id, name, created, category, content, dates, archived }, idx) => {
       if (!archived)
         return `<tr class="todo">
     <td class="todo__field">${name}</td>
     <td class="todo__field">${created}</td>
     <td class="todo__field">${category}</td>
     <td class="todo__field">${content}</td>
-    <td class="todo__field">${deadline}</td>
+    <td class="todo__field">${dates}</td>
     <td class="todo__field">
     <button type="button" id="${idx}" class="archive-item">archive</button>
     <button type="button" id="${idx}" class="delete-item">delete</button></td>
@@ -26,9 +26,9 @@ export const renderTodos = (targetElement, elementToRender) =>
 renderTodos(selectors.todoList, createTodos(todos));
 
 export const createCategoriesList = items => {
-  const taskList = todos.filter(todo => todo.category === 'Task');
-  const ideaList = todos.filter(todo => todo.category === 'Idea');
-  const thoughtsList = todos.filter(todo => todo.category === 'Random Thought');
+  const taskList = items.filter(todo => todo.category === 'Task');
+  const ideaList = items.filter(todo => todo.category === 'Idea');
+  const thoughtsList = items.filter(todo => todo.category === 'Random Thought');
   const activeTasks = taskList.filter(todo => todo.active);
   const archivedTasks = taskList.filter(todo => todo.archived);
   const activeIdeas = ideaList.filter(todo => todo.active);
@@ -52,3 +52,21 @@ export const createCategoriesList = items => {
     </tr>`;
 };
 renderTodos(selectors.categoriesList, createCategoriesList(todos));
+
+export const createArchivedTodos = items =>
+  items
+    .map(({ id, name, created, category, content, dates, archived }, idx) => {
+      if (archived)
+        return `<tr class="todo">
+    <td class="todo__field">${name}</td>
+    <td class="todo__field">${created}</td>
+    <td class="todo__field">${category}</td>
+    <td class="todo__field">${content}</td>
+    <td class="todo__field">${dates}</td>
+    <td class="todo__field">
+    <button type="button" id="${idx}" class="unarchive-item">unarchive</button>
+    <button type="button" id="${idx}" class="delete-item">delete</button>
+    </tr>`;
+    })
+    .join('');
+renderTodos(selectors.archivedTodosList, createArchivedTodos(todos));
