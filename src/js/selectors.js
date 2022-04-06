@@ -13,4 +13,10 @@ export const selectors = {
   archivedModal: document.querySelector('.archived-modal'),
   openArchivedButton: document.querySelector('.open-archived-modal'),
   closeArchivedButton: document.querySelector('.close-archived-modal'),
+  editModal: document.querySelector('.edit-modal'),
+  closeEditButton: document.querySelector('.close-edit-modal'),
+  openEditButton: document.querySelector('.edit-item'),
+  editedNameInput: document.querySelector('#edit-name'),
+  editedContentInput: document.querySelector('#edit-content'),
+  editedCategoryInput: document.querySelector('#edit-category'),
 };

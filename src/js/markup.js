@@ -14,6 +14,7 @@ export const createTodos = items =>
     <td class="todo__field">${content}</td>
     <td class="todo__field">${dates}</td>
     <td class="todo__field">
+    <button type="button" id="${idx}" class="edit-item">edit</button>
     <button type="button" id="${idx}" class="archive-item">archive</button>
     <button type="button" id="${idx}" class="delete-item">delete</button></td>
     </tr>`;
