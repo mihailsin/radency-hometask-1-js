@@ -36,7 +36,7 @@ export const todos = [
     name: '1st Hometask',
     created: '20.01.2022',
     category: 'Task',
-    content: 'Finish 1st hometask until 10.04.2022',
+    content: 'Finish all 3 hometasks',
     archived: false,
     active: true,
     dates: '',
