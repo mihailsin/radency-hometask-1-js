@@ -119,6 +119,8 @@ export const onSubmit = e => {
   todos.push(todo);
   renderTodos(selectors.todoList, createTodos(todos));
   renderTodos(selectors.categoriesList, createCategoriesList(todos));
+  e.target.reset();
+  selectors.addTodoModal.classList.add('is-hidden');
 };
 
 export const onEdit = e => {
@@ -133,6 +135,8 @@ export const onEdit = e => {
   itemToEdit.dates = editedContentInput.value?.match(date)?.join(', ') || '';
   renderTodos(selectors.todoList, createTodos(todos));
   renderTodos(selectors.categoriesList, createCategoriesList(todos));
+  e.target.reset();
+  selectors.editgiModal.classList.add('is-hidden');
 };
 
 selectors.addTodoForm.addEventListener('submit', onSubmit);
